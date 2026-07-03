@@ -1,7 +1,9 @@
-package com.inventory.service;
+package com.inventory.service.impl;
 
 import com.inventory.entity.Category;
 import com.inventory.repository.CategoryRepository;
+import com.inventory.service.CategoryService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
