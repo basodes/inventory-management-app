@@ -1,0 +1,23 @@
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Java
+target/
+*.class
+
+# Logs
+logs/
+*.log
+
+# Node
+node_modules/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
