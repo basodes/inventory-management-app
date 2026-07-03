@@ -1,5 +1,7 @@
 package com.inventory.entity;
 
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -26,7 +28,9 @@ public class Product {
     private String description;
 
     @NotBlank(message = "Category is required")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Min(0)
     private Double price;
