@@ -21,3 +21,27 @@ node_modules/
 # OS
 .DS_Store
 Thumbs.db
+
+# Maven
+target/
+
+# IntelliJ
+.idea/
+
+*.iml
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Java
+*.class
+
+# Environment
+.env
+
+# OS
+Thumbs.db
+.DS_Store
