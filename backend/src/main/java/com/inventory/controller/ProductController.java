@@ -1,11 +1,13 @@
 package com.inventory.controller;
 
 import com.inventory.entity.Product;
+import com.inventory.payload.ApiResponse;
 import com.inventory.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -33,9 +35,17 @@ public class ProductController {
 
     // Get Product By ID
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
-    }
+    public ApiResponse<Product> getProductById(@PathVariable Long id){
+
+    Product product = productService.getProductById(id);
+
+        return ApiResponse.<Product>builder()
+            .success(true)
+            .message("Product fetched successfully")
+            .data(product)
+            .timestamp(LocalDateTime.now())
+            .build();
+}
 
     // Update Product
     @PutMapping("/{id}")
