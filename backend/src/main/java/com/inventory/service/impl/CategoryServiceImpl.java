@@ -1,6 +1,7 @@
 package com.inventory.service.impl;
 
 import com.inventory.entity.Category;
+import com.inventory.exception.ResourceNotFoundException;
 import com.inventory.repository.CategoryRepository;
 import com.inventory.service.CategoryService;
 
@@ -30,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
     }
 
     @Override

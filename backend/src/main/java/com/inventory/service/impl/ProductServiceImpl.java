@@ -1,6 +1,7 @@
 package com.inventory.service.impl;
 
 import com.inventory.entity.Product;
+import com.inventory.exception.ResourceNotFoundException;
 import com.inventory.repository.ProductRepository;
 import com.inventory.service.ProductService;
 
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long productId) {
         return productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + productId));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + productId));
     }
 
     @Override

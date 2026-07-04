@@ -1,6 +1,7 @@
 package com.inventory.service.impl;
 
 import com.inventory.entity.Supplier;
+import com.inventory.exception.ResourceNotFoundException;
 import com.inventory.repository.SupplierRepository;
 import com.inventory.service.SupplierService;
 
@@ -30,7 +31,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Supplier getSupplierById(Long supplierId) {
         return supplierRepository.findById(supplierId)
-                .orElseThrow(() -> new RuntimeException("Supplier not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Supplier not found"));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.inventory.service.impl;
 
 import com.inventory.entity.Inventory;
+import com.inventory.exception.ResourceNotFoundException;
 import com.inventory.repository.InventoryRepository;
 import com.inventory.service.InventoryService;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public Inventory getInventoryById(Long inventoryId) {
         return inventoryRepository.findById(inventoryId)
-                .orElseThrow(() -> new RuntimeException("Inventory not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Inventory not found"));
     }
 
     @Override
