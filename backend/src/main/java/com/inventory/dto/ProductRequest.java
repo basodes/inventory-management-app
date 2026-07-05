@@ -2,6 +2,7 @@ package com.inventory.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -12,12 +13,14 @@ public class ProductRequest {
 
     private String description;
 
-    @NotBlank(message = "Category is required")
-    private String category;
+    @NotNull(message = "Category is required")
+    private Long categoryId;
 
-    @Min(value = 0)
+    @NotNull(message = "Price is required")
+    @Min(value = 0, message = "Price cannot be negative")
     private Double price;
 
-    @Min(value = 0)
+    @NotNull(message = "Quantity is required")
+    @Min(value = 0, message = "Quantity cannot be negative")
     private Integer quantity;
 }

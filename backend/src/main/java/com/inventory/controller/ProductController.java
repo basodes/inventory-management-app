@@ -1,15 +1,20 @@
 package com.inventory.controller;
 
-import com.inventory.entity.Product;
-import com.inventory.payload.ApiResponse;
+import com.inventory.dto.ProductRequest;
+import com.inventory.dto.ProductResponse;
 import com.inventory.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@Tag(
+        name = "Product APIs",
+        description = "Operations related to product management"
+)
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -20,47 +25,43 @@ public class ProductController {
         this.productService = productService;
     }
 
-    // Create Product
+    @Operation(summary = "Create a new product")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(@Valid @RequestBody Product product) {
-        return productService.createProduct(product);
+    public ProductResponse createProduct(
+            @Valid @RequestBody ProductRequest request) {
+
+        return productService.createProduct(request);
     }
 
-    // Get All Products
+    @Operation(summary = "Get all products")
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<ProductResponse> getAllProducts() {
+
         return productService.getAllProducts();
     }
 
-    // Get Product By ID
+    @Operation(summary = "Get product by ID")
     @GetMapping("/{id}")
-    public ApiResponse<Product> getProductById(@PathVariable Long id){
+    public ProductResponse getProductById(@PathVariable Long id) {
 
-    Product product = productService.getProductById(id);
-
-        return ApiResponse.<Product>builder()
-            .success(true)
-            .message("Product fetched successfully")
-            .data(product)
-            .timestamp(LocalDateTime.now())
-            .build();
-}
-
-    // Update Product
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id,
-                                 @RequestBody Product product) {
-
-        return productService.updateProduct(id, product);
+        return productService.getProductById(id);
     }
 
-    // Delete Product
+    @Operation(summary = "Update product")
+    @PutMapping("/{id}")
+    public ProductResponse updateProduct(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequest request) {
+
+        return productService.updateProduct(id, request);
+    }
+
+    @Operation(summary = "Delete product")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(@PathVariable Long id) {
 
         productService.deleteProduct(id);
     }
-
 }
